@@ -44,19 +44,23 @@ function collectFormData(request, response){
   superagent.get(url)
     .then(results => {
       let resultsArray = results.body.items;
-      // console.log(resultsArray);
+      console.log(resultsArray[0].volumeInfo.imageLinks);
       const finalArray = resultsArray.map(book => {
         return new Book(book.volumeInfo);
       });
-      console.log(finalArray);
       response.render('pages/searches/show.ejs', {bananas: finalArray,});
     });
 }
 
+
 function Book(obj){
   this.title = obj.title || 'no title available';
-  console.log(this.title);
+  this.author = obj.authors || 'No author available';
+  this.description = obj.description;
+  this.image = obj.imageLinks.thumbnail ? obj.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
 }
+
+
 
 client.connect()
   .then(
