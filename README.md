@@ -17,25 +17,23 @@ Search for Books by Title and Author on google api endpoints
 install dependencies from the package.json
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+libs: express, ejs, pg, dotenv
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an examples:
+2/25/2020 1030 - 'Hello World' achieved in the wild
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with GET and POST routes for the book resource.
 
-## Credits and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+**************************
 
 Number and name of feature: 11.1 FOUC (flash of unstyled content)
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1.5hr
 
-Start time: _____
+Start time: 0900
 
-Finish time: _____
+Finish time: 1030
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1.5hr
 
 ****************
 
