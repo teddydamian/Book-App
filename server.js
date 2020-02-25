@@ -19,6 +19,13 @@ app.get('/hello', (request, response) => {
   response.render('pages/index.ejs');
 });
 
+app.get('/search', sendSearchForm);
+
+function sendSearchForm(request, response){
+  response.render('pages/searches/show.ejs');
+  // views/pages/searches/show.ejs
+}
+
 app.post('/searches', collectFormData);
 
 function collectFormData(request, response){
