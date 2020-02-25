@@ -25,6 +25,8 @@ function sendSearchForm(request, response){
   response.render('pages/index.ejs');
 }
 
+app.get('/error', serveErrorPage);
+
 app.post('/searches', collectFormData);
 
 function collectFormData(request, response){
@@ -52,14 +54,18 @@ function collectFormData(request, response){
     });
 }
 
+function serveErrorPage(request, response){
+  response.render('pages/error.ejs');
+}
 
 function Book(obj){
   this.title = obj.title || 'no title available';
   this.author = obj.authors || 'No author available';
   this.description = obj.description;
-  this.image = obj.imageLinks.thumbnail ? obj.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
+  this.image = obj.imageLinks !== undefined ? obj.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
 }
 
+this.author = obj.author.length > 0 ? obj.author.reduce ((acc, val, ind, array) => { return acc += ` ${val}`},'') : 'No Author Available';
 
 
 client.connect()
