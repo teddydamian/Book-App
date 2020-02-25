@@ -19,6 +19,34 @@ app.get('/hello', (request, response) => {
   response.render('pages/index.ejs');
 });
 
+app.post('/searches', collectFormData);
+
+function collectFormData(request, response){
+  let formData = request.body.search;
+  let nameOfBookOrAuthor = formData[0];
+  let isAuthorOrTitle = formData[1];
+
+  let url = `https://www.googleapis.com/books/v1/volumes?q=`;
+
+  if(isAuthorOrTitle === 'title'){
+    url += `+intitle:${nameOfBookOrAuthor}`;
+  } else if (isAuthorOrTitle === 'author'){
+    url += `+inauthor:${nameOfBookOrAuthor}`;
+  }
+
+  superagent.get(url)
+    .then(results => {
+      let resultsArray = results.body.items;
+      const finalArray = resultsArray.map(book => {
+        new Book(book.volumeInfo);
+      });
+      response.render('./show.ejs', {bananas: finalArray});
+    });
+}
+
+function Book(obj){
+  this.title = obj.title || 'no title available';
+}
 
 client.connect()
   .then(
