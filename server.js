@@ -15,6 +15,10 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 3001;
 
+app.get('/hello', (request, response) => {
+  response.render('pages/index.ejs');
+});
+
 
 client.connect()
   .then(
