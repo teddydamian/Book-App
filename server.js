@@ -15,15 +15,14 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 3001;
 
-app.get('/hello', (request, response) => {
-  response.render('pages/index.ejs');
-});
+// app.get('/hello', (request, response) => {
+//   response.render('pages/index.ejs');
+// });
 
-app.get('/search', sendSearchForm);
+app.get('/', sendSearchForm);
 
 function sendSearchForm(request, response){
-  response.render('pages/searches/show.ejs');
-  // views/pages/searches/show.ejs
+  response.render('index.ejs');
 }
 
 app.post('/searches', collectFormData);
@@ -41,13 +40,14 @@ function collectFormData(request, response){
     url += `+inauthor:${nameOfBookOrAuthor}`;
   }
 
+  console.log(url);
   superagent.get(url)
     .then(results => {
       let resultsArray = results.body.items;
       const finalArray = resultsArray.map(book => {
         new Book(book.volumeInfo);
       });
-      response.render('./show.ejs', {bananas: finalArray});
+      response.render('pages/searches/show.ejs', {bananas: finalArray,});
     });
 }
 
