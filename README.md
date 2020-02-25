@@ -1,6 +1,9 @@
 [trello copy](
   https://trello.com/b/ajoyuL4k/book-app-morgan-h
 )
+[heroku website](
+  https://mh-td-booklist.herokuapp.com/
+)
 
 # Project Name
 
@@ -23,3 +26,73 @@ install dependencies from the package.json
 
 ## Credits and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+
+Number and name of feature: 11.1 FOUC (flash of unstyled content)
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+****************
+
+Number and name of feature: 11.2 Google Books API
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+**********
+
+Number and name of feature: 11.3 Browse Search Results
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+***************
+
+Number and name of feature: 11.4 Error Message Handling
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+*****************
+
+Number and name of feature: 11.5 Simple UI
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+***************
+
+Number and name of feature: 11.6 Home Page
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
