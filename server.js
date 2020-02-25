@@ -62,29 +62,18 @@ function serveErrorPage(request, response){
 function Book(obj){
 
   this.title = obj.title || 'no title available';
-  this.author = obj.authors || 'No author available';
   this.description = obj.description;
-
+  console.log(obj);
   this.title = obj.title || 'No title available';
-  this.author = obj.authors.length > 0 ? obj.authors.reduce ((acc, val) => { return acc += ` ${val},`} ,'') : 'No Author Available';
-
-  // if(obj.authors.length > 1){
-  //   for(let i = 0; i < obj.authors.length; i++){
-  //     this.author += `${obj.authors[i]}`;
-  //   }
-  // }else if (obj.authors === 1){
-  //   this.author = obj.authors;
-  // }else{
-  //   `No author available`;
-  // }
+  // make an 'authors' string that has proper comma and spaces
+  this.author = obj.authors && obj.authors.length > 0 ? obj.authors.reduce ((acc, val, ind, arr) => 
+  { acc += ind !== 0 && ind < arr.length ? ', ' : ''; 
+  return acc += `${val}`;} ,'') : 'No Author Available';
 
   this.description = obj.description || 'No Description Available';
 
   this.image = obj.imageLinks !== undefined ? obj.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
 }
-
-this.author = obj.author.length > 0 ? obj.author.reduce ((acc, val, ind, array) => { return acc += ` ${val}`},'') : 'No Author Available';
-
 
 client.connect()
   .then(

@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link href="styles/reset.css" rel='stylesheet'>
+    <link href="styles/base.css" rel='stylesheet'>
+    <link href="styles/layout.css" rel='stylesheet'>
+
     <title>Book Collection</title>
   </head>
   <body>
+    <nav>
+      <p>Best Books!</p>
+      <p>Search Results</p>
+    </nav>
     <main>
-        <h1>Here are the results that matches your search:</h1>
         <ul>
           <% bananas.forEach(book => { %>
-            <li><%= book.title %></li>
+            <li><h1><%= book.title %></h1>
             <p>Author: <%= book.author %></p>
             <img src="<%= book.image %>" />
             <p>Description: <%= book.description %></p>
             <% }); %>
+          </li>
         </ul>
     </main>
   </body>
