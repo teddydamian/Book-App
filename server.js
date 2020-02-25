@@ -74,8 +74,6 @@ function Book(obj){
   this.image = obj.imageLinks !== undefined ? obj.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
 }
 
-
-
 client.connect()
   .then(
     app.listen(PORT, () => console.log(`listening on ${PORT}`))
