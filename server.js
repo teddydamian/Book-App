@@ -62,12 +62,13 @@ function serveErrorPage(request, response){
 function Book(obj){
 
   this.title = obj.title || 'no title available';
-  this.author = obj.authors || 'No author available';
   this.description = obj.description;
-
+  console.log(obj);
   this.title = obj.title || 'No title available';
   // make an 'authors' string that has proper comma and spaces
-  this.author = obj.authors.length > 0 ? obj.authors.reduce ((acc, val, ind, arr) => { acc += ind !== 0 && ind < arr.length ? ', ' : ''; return acc += `${val}`;} ,'') : 'No Author Available';
+  this.author = obj.authors && obj.authors.length > 0 ? obj.authors.reduce ((acc, val, ind, arr) => 
+  { acc += ind !== 0 && ind < arr.length ? ', ' : ''; 
+  return acc += `${val}`;} ,'') : 'No Author Available';
 
   this.description = obj.description || 'No Description Available';
 
