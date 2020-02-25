@@ -83,6 +83,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Reference Docs
+exampleDocs/
+
 # TypeScript v1 declaration files
 typings/
 
