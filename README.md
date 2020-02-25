@@ -63,13 +63,13 @@ Actual time needed to complete: _____
 
 Number and name of feature: 11.4 Error Message Handling
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 15min
 
-Start time: _____
+Start time: 1245
 
-Finish time: _____
+Finish time: 1300
 
-Actual time needed to complete: _____
+Actual time needed to complete: 15min
 
 *****************
 
@@ -94,3 +94,5 @@ Start time: _____
 Finish time: _____
 
 Actual time needed to complete: _____
+
+this.author = obj.author.length > 0 ? obj.author.reduce ((acc, val, ind, array) => { return acc += ` ${val},'') : "No Author Available"
