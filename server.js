@@ -22,7 +22,8 @@ app.get('/hello', (request, response) => {
 app.get('/search', sendSearchForm);
 
 function sendSearchForm(request, response){
-  response.render('./searches/new.ejs');
+  response.render('pages/searches/show.ejs');
+  // views/pages/searches/show.ejs
 }
 
 app.post('/searches', collectFormData);
