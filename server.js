@@ -26,12 +26,12 @@ app.post('/searches', collectFormData);
 
 function sendSearchForm(request, response){
   let sql = 'SELECT * FROM books;';
-  let sql1 = 'SELECT COUNT(*) FROM books;';
 
-  client.query(sql, sql1)
+  client.query(sql)
     .then(results =>{
       console.log(results);
       let books = results.rows;
+
       response.render('pages/index.ejs', {bookArray: books});
     });
 }

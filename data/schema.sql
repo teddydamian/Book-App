@@ -8,5 +8,5 @@ CREATE TABLE books (
   img_link VARCHAR(255),
   isbn_10 NUMERIC(10),
   isbn_13 NUMERIC(13),
-  genre TEXT,
-)
+  genre TEXT
+);
