@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <section>
+          <ul>
+            <li data-id="<%= bookObj.id %>">
+              <h4>Book title: <%= bookObj.title %></h4>
+              <p>Author(s): <%= bookObj.author %></p>
+              <p>Book Description: <%= bookObj.description %></p>
+              <img link="<%= bookObj.img_link %>"</p>
+              <p>ISBN13: <%= bookObj.isbn_13 %></p>
+              <p>ISBN10: <%= bookObj.isbn_10 %></p>
+              <p>Genre: <%= bookObj.genre %></p>
+            </li>
+          </ul>
+        </section>
+      </main>
+</body>
+</html>

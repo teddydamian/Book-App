@@ -22,6 +22,22 @@ const PORT = process.env.PORT || 3001;
 app.get('/', sendSearchForm);
 app.get('/error', serveErrorPage);
 app.post('/searches', collectFormData);
+app.get('/books/:id', getOneBook);
+
+function getOneBook(request, response){
+
+  let id = request.params.id;
+
+  let sql = 'SELECT * FROM books WHERE id=$1;';
+  let safeValues = [id];
+
+  client.query(sql, safeValues)
+    .then(results => {
+      // console.log(results);
+      let book = results.rows[0];
+      response.render('./pages/books/detail.ejs', {bookObj: book});
+    });
+}
 
 
 function sendSearchForm(request, response){
@@ -86,7 +102,7 @@ function Book(obj){
   this.description = obj.description || 'No Description Available';
 
   this.image = obj.imageLinks !== undefined ? obj.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
-
+  this.id = obj.id;
   this.categories = obj.categories && obj.categories.length > 0 ? obj.categories.reduce ((acc, val, ind, arr) =>
   { acc += ind !== 0 && ind < arr.length ? ', ' : '';
     return acc += `${val}`;} ,'') : 'No Categories Available';
