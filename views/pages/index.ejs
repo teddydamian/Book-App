@@ -31,11 +31,10 @@
         </form>
         <section class="task-view container">
             <ul>
-            <% booArray.forEach(book => { %>
+            <% bookArray.forEach(book => { %>
               <li><%= book.title %></li>
               <li><%= book.description %></li>
               <li><%= book.status %></li>
-              <!-- <a href='/tasks/<%= task.id %>'>more details</a> -->
             <% }) %>
             </ul>
           </section>
