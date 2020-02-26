@@ -87,9 +87,9 @@ function Book(obj){
 
   this.image = obj.imageLinks !== undefined ? obj.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
 
-  // this.categories = obj.categories && obj.categories.length > 0 ? obj.categories.reduce ((acc, val, ind, arr) =>
-  // { acc += ind !== 0 && ind < arr.length ? ', ' : '';
-  //   return acc += `${val}`;} ,'') : 'No Categories Available';
+  this.categories = obj.categories && obj.categories.length > 0 ? obj.categories.reduce ((acc, val, ind, arr) =>
+  { acc += ind !== 0 && ind < arr.length ? ', ' : '';
+    return acc += `${val}`;} ,'') : 'No Categories Available';
 }
 
 client.connect()
