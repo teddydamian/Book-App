@@ -15,10 +15,25 @@
     <main>
         <ul>
           <% bananas.forEach(book => { %>
-            <li><h1><%= book.title %></h1>
+            <li><%= book.title %></li>
             <p>Author: <%= book.author %></p>
             <img src="<%= book.image %>" />
-            <p>Description: <%= book.description %></p>
+            <br>
+
+            <li>
+              <form method="POST" action="/detail">
+                <fieldset>
+                  <input type="text" name="title" value="<%= book.title %>">
+                  <input type="text" name="author" value="<%= book.author %>">
+                  <input type="text" name="description" value="<%= book.description %>">
+                  <input type="text" name="categories" value="<%= book.categories %>">
+                  <input type="text" name="ISBN_10" value="<%= book.ISBN_10 %>">
+                  <input type="text" name="ISBN_13" value="<%= book.ISBN_13 %>">
+                  <button type='submit'>Details1</button>
+                </fieldset>
+              </form>
+            </li>
+
             <% }); %>
           </li>
         </ul>
