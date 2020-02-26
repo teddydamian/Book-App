@@ -9,4 +9,4 @@ CREATE TABLE books (
   isbn_10 NUMERIC(10),
   isbn_13 NUMERIC(13),
   genre TEXT
-)
+);
