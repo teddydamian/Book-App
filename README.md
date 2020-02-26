@@ -21,6 +21,7 @@ libs: express, ejs, pg, dotenv
 
 ## Change Log
 2/25/2020 1030 - 'Hello World' achieved in the wild
+2/25/2020 1100 - 'Constructor Function and created basic CSS'
 
 
 **************************
