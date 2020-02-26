@@ -9,9 +9,13 @@
         <ul>
           <% bananas.forEach(book => { %>
             <li><%= book.title %></li>
+            <li>ISBN 10 Code: <%= book.ISBN_10 %></li>
+            <li>ISBN 13 Code: <%= book.ISBN_13 %></li>
             <p>Author: <%= book.author %></p>
             <img src="<%= book.image %>" />
             <p>Description: <%= book.description %></p>
+            <li>Categories: <%= book.categories %></li>
+            <br>
             <% }); %>
         </ul>
     </main>

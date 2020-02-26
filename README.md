@@ -21,6 +21,7 @@ libs: express, ejs, pg, dotenv
 
 ## Change Log
 2/25/2020 1030 - 'Hello World' achieved in the wild
+2/25/2020 1700 - Basic Styling, books returning from api for both author and title searches, error page/function created
 
 
 **************************

@@ -8,7 +8,7 @@ require('ejs');
 const superagent = require('superagent');
 
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: true,}));
 app.use(express.static('./public'));
 
 require('dotenv').config();
@@ -49,10 +49,11 @@ function collectFormData(request, response){
       console.log(resultsArray[0].volumeInfo.imageLinks);
       const finalArray = resultsArray.map(book => {
         return new Book(book.volumeInfo);
-
       });
       response.render('pages/searches/show.ejs', {bananas: finalArray,});
-    });
+    
+    }
+    );
 }
 
 function serveErrorPage(request, response){
@@ -60,19 +61,27 @@ function serveErrorPage(request, response){
 }
 
 function Book(obj){
-
+  if(obj.industryIdentifiers){
+    obj.industryIdentifiers.forEach( val => {
+      this[val.type] = val.identifier;
+    });
+  }
   this.title = obj.title || 'no title available';
-  this.description = obj.description;
+  // this.description = obj.description;
   console.log(obj);
-  this.title = obj.title || 'No title available';
+  // this.title = obj.title || 'No title available';
   // make an 'authors' string that has proper comma and spaces
-  this.author = obj.authors && obj.authors.length > 0 ? obj.authors.reduce ((acc, val, ind, arr) => 
-  { acc += ind !== 0 && ind < arr.length ? ', ' : ''; 
-  return acc += `${val}`;} ,'') : 'No Author Available';
+  this.author = obj.authors && obj.authors.length > 0 ? obj.authors.reduce ((acc, val, ind, arr) =>
+  { acc += ind !== 0 && ind < arr.length ? ', ' : '';
+    return acc += `${val}`;} ,'') : 'No Author Available';
 
   this.description = obj.description || 'No Description Available';
 
   this.image = obj.imageLinks !== undefined ? obj.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
+
+  // this.categories = obj.categories && obj.categories.length > 0 ? obj.categories.reduce ((acc, val, ind, arr) =>
+  // { acc += ind !== 0 && ind < arr.length ? ', ' : '';
+  //   return acc += `${val}`;} ,'') : 'No Categories Available';
 }
 
 
@@ -80,5 +89,6 @@ function Book(obj){
 client.connect()
   .then(
     app.listen(PORT, () => console.log(`listening on ${PORT}`))
-  );
+  ).catch(
+    (error) => console.log('Restart Postgresql', error));
 
