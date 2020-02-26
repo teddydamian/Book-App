@@ -1,5 +1,6 @@
 'use strict';
 
+require('dotenv').config();
 const client = require('./libs/client');
 
 const express = require('express');
@@ -11,7 +12,6 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true,}));
 app.use(express.static('./public'));
 
-require('dotenv').config();
 
 const PORT = process.env.PORT || 3001;
 
@@ -20,14 +20,22 @@ const PORT = process.env.PORT || 3001;
 // });
 
 app.get('/', sendSearchForm);
+app.get('/error', serveErrorPage);
+app.post('/searches', collectFormData);
+
 
 function sendSearchForm(request, response){
-  response.render('pages/index.ejs');
+  let sql = 'SELECT * FROM books;';
+  let sql1 = 'SELECT COUNT(*) FROM books;';
+
+  client.query(sql, sql1)
+    .then(results =>{
+      console.log(results);
+      let books = results.rows;
+      response.render('pages/index.ejs', {bookArray: books});
+    });
 }
 
-app.get('/error', serveErrorPage);
-
-app.post('/searches', collectFormData);
 
 function collectFormData(request, response){
   let formData = request.body.search;
