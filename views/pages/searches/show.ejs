@@ -16,16 +16,12 @@
         <ul>
           <% bananas.forEach(book => { %>
             <li><%= book.title %></li>
-            <li>ISBN 10 Code: <%= book.ISBN_10 %></li>
-            <li>ISBN 13 Code: <%= book.ISBN_13 %></li>
             <p>Author: <%= book.author %></p>
             <img src="<%= book.image %>" />
-            <p>Description: <%= book.description %></p>
-            <li>Categories: <%= book.categories %></li>
             <br>
 
             <li>
-              <form method="POST">
+              <form method="POST" action="/detail">
                 <fieldset>
                   <input type="text" name="title" value="<%= book.title %>">
                   <input type="text" name="author" value="<%= book.author %>">
@@ -33,7 +29,7 @@
                   <input type="text" name="categories" value="<%= book.categories %>">
                   <input type="text" name="ISBN_10" value="<%= book.ISBN_10 %>">
                   <input type="text" name="ISBN_13" value="<%= book.ISBN_13 %>">
-                  <button type='submit'>Details</button>
+                  <button type='submit'>Details1</button>
                 </fieldset>
               </form>
             </li>
