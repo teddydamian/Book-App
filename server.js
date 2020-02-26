@@ -99,7 +99,7 @@ function collectFormData(request, response){
         return new Book(book.volumeInfo);
       });
       response.render('pages/searches/show.ejs', {bananas: finalArray,});
-    
+
     }
     );
 }
