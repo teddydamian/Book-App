@@ -1,0 +1,22 @@
+form {
+  display:contents;
+  display:grid;
+  grid-template-columns: 12% 1fr;
+}
+fieldset{
+  display:contents;
+}
+
+label {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+input {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.title {
+ width:50%; 
+}

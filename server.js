@@ -23,13 +23,31 @@ app.get('/', sendSearchForm);
 app.get('/error', serveErrorPage);
 app.post('/searches', collectFormData);
 app.post('/show', injectBook);
-
+app.post('/detail', showDetails);
 app.get('/books/:id', getOneBook);
+app.post('/save', saveBook);
+
+function saveBook(request, response){
+  console.log(request.body);
+  let sql = 'INSERT INTO books (title, author, book_description, categories, isbn_10, isbn_13) VALUES ($1, $2, $3, $4, $5, $6);';
+  let {title, author, description, categories, ISBN_10, ISBN_13} = request.body;
+  let safeValues = [title, author, description, categories, ISBN_10, ISBN_13];
+  client.query(sql, safeValues)
+    .then( results => {
+      console.log('render error');
+      response.render('./pages/error.ejs');
+    });
+}
+
+function showDetails(request, response){
+  console.log('hi', request.body);
+  // let book = new Book(request.body);
+  // console.log(book);
+  response.render('./pages/books/detail.ejs', {bookObj: request.body});
+}
 
 function getOneBook(request, response){
-
   let id = request.params.id;
-
   let sql = 'SELECT * FROM books WHERE id=$1;';
   let safeValues = [id];
 
@@ -119,4 +137,3 @@ client.connect()
     app.listen(PORT, () => console.log(`listening on ${PORT}`))
   ).catch(
     (error) => console.log('Restart Postgresql', error));
-
