@@ -23,7 +23,6 @@ app.get('/', sendSearchForm);
 app.get('/error', serveErrorPage);
 app.post('/searches', collectFormData);
 app.post('/show', injectBook);
-
 app.get('/books/:id', getOneBook);
 
 function getOneBook(request, response){
@@ -81,7 +80,7 @@ function collectFormData(request, response){
         return new Book(book.volumeInfo);
       });
       response.render('pages/searches/show.ejs', {bananas: finalArray,});
-    
+
     }
     );
 }

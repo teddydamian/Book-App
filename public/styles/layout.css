@@ -28,7 +28,14 @@ ul li{
     text-align: center;
     margin: 30px;
 }
-
+section > :first-child{
+    text-align: center;
+}
+#dbBooks{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
 li h1{
     font-size: 20px;
 }
