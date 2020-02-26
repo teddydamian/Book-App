@@ -22,6 +22,8 @@ const PORT = process.env.PORT || 3001;
 app.get('/', sendSearchForm);
 app.get('/error', serveErrorPage);
 app.post('/searches', collectFormData);
+app.post('/show', injectBook);
+
 app.get('/books/:id', getOneBook);
 
 function getOneBook(request, response){
@@ -39,6 +41,10 @@ function getOneBook(request, response){
     });
 }
 
+
+function injectBook(response, request){
+
+}
 
 function sendSearchForm(request, response){
   let sql = 'SELECT * FROM books;';
