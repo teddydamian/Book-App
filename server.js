@@ -84,8 +84,6 @@ function Book(obj){
   //   return acc += `${val}`;} ,'') : 'No Categories Available';
 }
 
-
-
 client.connect()
   .then(
     app.listen(PORT, () => console.log(`listening on ${PORT}`))
