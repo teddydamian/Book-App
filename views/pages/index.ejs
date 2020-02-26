@@ -35,6 +35,7 @@
               <li><%= book.title %></li>
               <li><%= book.author %></li>
               <li><%= book.status %></li>
+              <a href='/books/<%=book.id%>'>more details</a>
             <% }) %>
             <li>Total Books : <%= bookArray.length %></li>
             </ul>
