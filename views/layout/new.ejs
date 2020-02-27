@@ -5,6 +5,7 @@
       <form method="POST" action="/detail">
         <fieldset>
           <img src="<%= book.image %>">
+          <input class='img' type="text" name="image" value="<%= book.image %>" style="display:none;">
           <label>Title</label>
           <input class='title' type="text" name="title" value="<%= book.title %>">
           <br>
@@ -18,10 +19,10 @@
           <input class='categories' type="text" name="categories" value="<%= book.categories %>">
           <br>
           <label>ISBN 10</label>
-          <input class='ISBN' type="text" name="ISBN_10" value="<%= book.isbn_10 %>">
+          <input class='ISBN' type="text" name="isbn_10" value="<%= book.isbn_10 %>">
           <br>
           <label>ISBN 13</label>
-          <input class='ISBN' type="text" name="ISBN_13" value="<%= book.isbn_13 %>">
+          <input class='ISBN' type="text" name="isbn_13" value="<%= book.isbn_13 %>">
           <button type='submit'>Details</button>
         </fieldset>
       </form>

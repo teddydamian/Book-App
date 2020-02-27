@@ -12,6 +12,8 @@ const methodOverride = require('method-override');
 
 // local funcs
 const saveBook = require('./libs/saveBook');
+const updateBook = require('./libs/updateBook');
+
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true,}));
@@ -34,35 +36,26 @@ app.post('/books', saveBook);
 app.put('/update/:id', updateBook);
 
 
-function updateBook(request, response){
+// function updateBook(request, response){
 
-  let {title, book_description, img_link, isbn_10, isbn_13, author} = request.body;
-  let id = request.params.id;
+//   let {title, book_description, img_link, isbn_10, isbn_13, author} = request.body;
+//   let id = request.params.id;
 
-  let sql = 'UPDATE books SET title=$1, book_description=$2, img_link=$3, isbn_10=$4, isbn_13=$5, author=$6 WHERE id=$7;';
+//   let sql = 'UPDATE books SET title=$1, book_description=$2, img_link=$3, isbn_10=$4, isbn_13=$5, author=$6 WHERE id=$7;';
 
-  let safeValues = [title, book_description, img_link, isbn_10, isbn_13, author, id];
+//   let safeValues = [title, book_description, img_link, isbn_10, isbn_13, author, id];
 
-  client.query(sql, safeValues)
-    .then(() => {
-      response.redirect('/');
-    });
-}
-
-// function saveBook(request, response){
-//   let sql = 'INSERT INTO books (title, author, book_description, categories, isbn_10, isbn_13) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;';
-//   // let sql = 'INSERT INTO book (title, book_description, author, img_link, isbn_10, isbn_13, categories) VALUES ($1, $2, $3, $4, $5, $6) WHERE NOT EXISTS (SELECT * FROM book WHERE isbn_10 = $5);';
-//   let {title, author, book_description, categories, ISBN_10, ISBN_13,} = request.body;
-//   let safeValues = [title, author, book_description, categories, ISBN_10, ISBN_13];
 //   client.query(sql, safeValues)
-//     .then( results => {
+//     .then(() => {
 //       response.redirect('/');
-//       // response.render('pages/books/detail.ejs', {bookObj: results.rows,});
-//     }).catch(error => console.log('save error', error));
+//     });
 // }
 
+
+
 function showDetails(request, response){
-  response.render('pages/books/show.ejs', {bookObj: request.body,endpoint:'/books',});
+  console.log(request.body);
+  response.render('pages/books/show.ejs', {bookObj: request.body, endpoint:'/books',});
 }
 
 function getOneBook(request, response){
@@ -123,11 +116,15 @@ function serveErrorPage(request, response){
 }
 
 function Book(obj){
+  
   if(obj.industryIdentifiers){
     obj.industryIdentifiers.forEach( val => {
-      this[val.type] = val.identifier;
+      this[(val.type).toLowerCase()] = val.identifier;
     });
   }
+  this.isbn_10 = this.isbn_10 || 0;
+  this.isbn_13 = this.isbn_13 || 0;
+
   this.title = obj.title || 'no title available';
   // this.description = obj.description;
   // this.title = obj.title || 'No title available';
@@ -140,12 +137,10 @@ function Book(obj){
 
   this.image = obj.imageLinks !== undefined ? obj.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
   this.id = obj.id || '';
+
   this.categories = obj.categories && obj.categories.length > 0 ? obj.categories.reduce ((acc, val, ind, arr) =>
   { acc += ind !== 0 && ind < arr.length ? ', ' : '';
     return acc += `${val}`;} ,'') : 'No Categories Available';
-
-  this.isbn_10 = obj.ISBN_10 || 0;
-  this.isbn_13 = obj.ISBN_13 || 0;
   console.log(this);
 }
 
