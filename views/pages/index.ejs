@@ -34,9 +34,18 @@
           <p>Total Books : <%= bookArray.length %></p>
             <ul id=dbBooks>
             <% bookArray.forEach(book => { %>
-              <li><%= book.title %> <br>
-              <%= book.author %>
-              <a href='/books/<%=book.id%>'>more details</a></li>
+              <form action= "<%= endpoint %>" method="POST">
+                <fieldset>
+                  <label><%= book.title %></label>
+                  <input class='title' type="text" name="title" value="<%= book.title %>">
+                  <br>
+                  <label><%= book.author %></label>
+                  <input class='author' type="text" name="author" value="<%= book.author %>">
+                  <br>
+                  <a href='/books/<%=book.id%>'>More details</a></li>
+                  <button type='submit'>Delete books</button>
+                </fieldset>
+              </form>
               <% }) %>
             </ul>
           </section>

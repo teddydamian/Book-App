@@ -1,27 +1,28 @@
+
 body{
     background-color: rgb(228, 228, 228);
+    background-image: url(../img/Paper-4.jpg); 
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center center; 
+    
 }
+
 nav{
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-}
-
-nav:first-child{
-    background-color: black;
-    color: white;
-    font-size: 30px;
-}
-
-nav > :nth-child(2){
+    padding-top: 30px;
     text-align: center;
-    background-color: rgb(61, 61, 61);
+    color: #C85222;
+    font-size: 30px;
+    font-family: cursive;
 }
+
 form{
     text-align: center;
 }
 input{
+    margin-top: 20px;
     width: 200px;
-    height: 40px;
+    height: 30px;
 }
 
 ul li{
@@ -31,6 +32,7 @@ ul li{
 section > :first-child{
     text-align: center;
 }
+
 #dbBooks{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -43,3 +45,7 @@ li h1{
 * {
     margin:auto;
 }
+
+/* input, label {
+    display:none;
+} */

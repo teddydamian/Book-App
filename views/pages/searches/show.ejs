@@ -4,6 +4,8 @@
     <link href="styles/reset.css" rel='stylesheet'>
     <link href="styles/base.css" rel='stylesheet'>
     <link href="styles/layout.css" rel='stylesheet'>
+    <link href="styles/modules.css" rel='stylesheet'>
+
 
     <title>Book Collection</title>
   </head>
@@ -13,30 +15,11 @@
       <p>Search Results</p>
     </nav>
     <main>
+      <section>
         <ul>
-          <% bananas.forEach(book => { %>
-            <li><%= book.title %></li>
-            <p>Author: <%= book.author %></p>
-            <img src="<%= book.image %>" />
-            <br>
-
-            <li>
-              <form method="POST" action="/detail">
-                <fieldset>
-                  <input type="text" name="title" value="<%= book.title %>">
-                  <input type="text" name="author" value="<%= book.author %>">
-                  <input type="text" name="description" value="<%= book.description %>">
-                  <input type="text" name="categories" value="<%= book.categories %>">
-                  <input type="text" name="ISBN_10" value="<%= book.ISBN_10 %>">
-                  <input type="text" name="ISBN_13" value="<%= book.ISBN_13 %>">
-                  <button type='submit'>Details1</button>
-                </fieldset>
-              </form>
-            </li>
-
-            <% }); %>
-          </li>
+          <%- include('../../layout/new.ejs') %>
         </ul>
+      </section>
     </main>
   </body>
 </html>
