@@ -34,7 +34,18 @@ app.post('/detail', showDetails);
 app.get('/books/:id', getOneBook);
 app.post('/books', saveBook);
 app.put('/update/:id', updateBook);
+app.delete('/delete/:id', deleteBook);
 
+function deleteBook(request, response){
+  let id = request.params.id;
+  let sql = 'DELETE FROM books WHERE id=$1;';
+  let safeValues = [id];
+  client.query(sql, safeValues)
+    .then(() => {
+      alert('Book has been deleted');
+      response.redirect('/');
+    });
+}
 
 // function updateBook(request, response){
 
@@ -54,7 +65,7 @@ app.put('/update/:id', updateBook);
 
 
 function showDetails(request, response){
-  console.log(request.body);
+
   response.render('pages/books/show.ejs', {bookObj: request.body, endpoint:'/books',});
 }
 
@@ -66,7 +77,7 @@ function getOneBook(request, response){
   client.query(sql, safeValues)
     .then(results => {
       let book = results.rows[0];
-      response.render('layout/detail.ejs', {bookObj: book,endpoint:`/update/${id}?_method=PUT`});
+      response.render('layout/detail.ejs', {bookObj: book, endpoint:`/update/${id}?_method=PUT`});
     });
 }
 
@@ -81,8 +92,8 @@ function sendSearchForm(request, response){
   client.query(sql)
     .then(results =>{
       let books = results.rows;
-
-      response.render('pages/index.ejs', {bookArray: books,});
+      let id = results.id;
+      response.render('pages/index.ejs', {bookArray: books, endpoint: `/delete/${id}?_method=DELETE`});
     });
 }
 
