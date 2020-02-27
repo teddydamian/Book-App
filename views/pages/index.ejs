@@ -34,7 +34,7 @@
           <p>Total Books : <%= bookArray.length %></p>
             <ul id=dbBooks>
             <% bookArray.forEach(book => { %>
-              <form action= "<%= endpoint %>" method="POST">
+              <form action="<%=`/DELETE/${book.id}?_method=DELETE` %>" method="post">
                 <fieldset>
                   <label><%= book.title %></label>
                   <input class='title' type="text" name="title" value="<%= book.title %>">
