@@ -31,6 +31,23 @@ app.post('/searches', collectFormData);
 app.post('/detail', showDetails);
 app.get('/books/:id', getOneBook);
 app.post('/books', saveBook);
+app.put('/update/:id', updateBook);
+
+
+function updateBook(request, response){
+
+  let {title, book_description, img_link, isbn_10, isbn_13, author} = request.body;
+  let id = request.params.id;
+
+  let sql = 'UPDATE books SET title=$1, book_description=$2, img_link=$3, isbn_10=$4, isbn_13=$5, author=$6 WHERE id=$7;';
+
+  let safeValues= [title, book_description, img_link, isbn_10, isbn_13, author, id];
+
+  client.query(sql, safeValues)
+    .then(() => {
+      response.redirect('/');
+    });
+}
 
 // function saveBook(request, response){
 //   let sql = 'INSERT INTO books (title, author, book_description, categories, isbn_10, isbn_13) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;';
@@ -48,9 +65,6 @@ function showDetails(request, response){
   response.render('pages/books/show.ejs', {bookObj: request.body,});
 }
 
-
-
-
 function getOneBook(request, response){
   let id = request.params.id;
   let sql = 'SELECT * FROM books WHERE id=$1;';
@@ -59,7 +73,7 @@ function getOneBook(request, response){
   client.query(sql, safeValues)
     .then(results => {
       let book = results.rows[0];
-      response.render('pages/books/detail.ejs', {bookObj: book,});
+      response.render('layout/detail.ejs', {bookObj: book,});
     });
 }
 
