@@ -41,7 +41,7 @@ function updateBook(request, response){
 
   let sql = 'UPDATE books SET title=$1, book_description=$2, img_link=$3, isbn_10=$4, isbn_13=$5, author=$6 WHERE id=$7;';
 
-  let safeValues= [title, book_description, img_link, isbn_10, isbn_13, author, id];
+  let safeValues = [title, book_description, img_link, isbn_10, isbn_13, author, id];
 
   client.query(sql, safeValues)
     .then(() => {
@@ -62,7 +62,7 @@ function updateBook(request, response){
 // }
 
 function showDetails(request, response){
-  response.render('pages/books/show.ejs', {bookObj: request.body,});
+  response.render('pages/books/show.ejs', {bookObj: request.body,endpoint:'/books',});
 }
 
 function getOneBook(request, response){
@@ -73,7 +73,7 @@ function getOneBook(request, response){
   client.query(sql, safeValues)
     .then(results => {
       let book = results.rows[0];
-      response.render('layout/detail.ejs', {bookObj: book,});
+      response.render('layout/detail.ejs', {bookObj: book,endpoint:`/update/${id}?_method=PUT`});
     });
 }
 
