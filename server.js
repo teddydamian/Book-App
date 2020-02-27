@@ -90,6 +90,7 @@ function sendSearchForm(request, response){
 
   client.query(sql)
     .then(results =>{
+      console.log(results.rows);
       let books = results.rows;
       let id = results.id;
       response.render('pages/index.ejs', {bookArray: books});
@@ -145,7 +146,7 @@ function Book(obj){
 
   this.book_description = obj.description || obj.book_description || 'No Description Available';
 
-  this.image = obj.imageLinks !== undefined ? obj.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
+  this.img_link = obj.imageLinks !== undefined ? obj.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
   this.id = obj.id || '';
 
   this.categories = obj.categories && obj.categories.length > 0 ? obj.categories.reduce ((acc, val, ind, arr) =>
