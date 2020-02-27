@@ -93,7 +93,6 @@ function collectFormData(request, response){
       const finalArray = resultsArray.map(book => {
         return new Book(book.volumeInfo);
       });
-      console.log(finalArray);
       response.render('pages/searches/show.ejs', {bookObj: finalArray,});
     }
     );
@@ -121,7 +120,6 @@ function Book(obj){
 
   this.image = obj.imageLinks !== undefined ? obj.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
   this.id = obj.id || '';
-  // console.log(this.image);
   this.categories = obj.categories && obj.categories.length > 0 ? obj.categories.reduce ((acc, val, ind, arr) =>
   { acc += ind !== 0 && ind < arr.length ? ', ' : '';
     return acc += `${val}`;} ,'') : 'No Categories Available';
