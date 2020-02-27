@@ -10,7 +10,7 @@
       <h4>Book title: <%= bookObj.title %></h4>
       <p>Author(s): <%= bookObj.author %></p>
       <p>Book Description: <%= bookObj.book_description %></p>
-      <img src="<%= bookObj.image %>"></p>
+      <img src="<%= bookObj.img_link %>"></p>
       <p>ISBN13: <%= bookObj.isbn_13 %></p>
       <p>ISBN10: <%= bookObj.isbn_10 %></p>
       <p>Genre: <%= bookObj.categories %></p>
@@ -19,7 +19,7 @@
   <form action= "<%= endpoint %>" method="POST">
     <fieldset>
       <label>Title</label>
-      <input class='img' type="text" name="image" value="<%= bookObj.image %>" style="display:none;">
+      <input class='img' type="text" name="img_link" value="<%= bookObj.img_link %>" style="display:none;">
       <input class='title' type="text" name="title" value="<%= bookObj.title %>">
       <br>
       <label>Author</label>
