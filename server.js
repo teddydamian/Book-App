@@ -9,6 +9,10 @@ require('ejs');
 const superagent = require('superagent');
 const methodOverride = require('method-override');
 
+
+// local funcs
+const saveBook = require('./libs/saveBook');
+
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true,}));
 app.use(express.static('./public'));
@@ -28,17 +32,17 @@ app.post('/detail', showDetails);
 app.get('/books/:id', getOneBook);
 app.post('/books', saveBook);
 
-function saveBook(request, response){
-  let sql = 'INSERT INTO books (title, author, book_description, categories, isbn_10, isbn_13) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;';
-  // let sql = 'INSERT INTO book (title, book_description, author, img_link, isbn_10, isbn_13, categories) VALUES ($1, $2, $3, $4, $5, $6) WHERE NOT EXISTS (SELECT * FROM book WHERE isbn_10 = $5);';
-  let {title, author, book_description, categories, ISBN_10, ISBN_13,} = request.body;
-  let safeValues = [title, author, book_description, categories, ISBN_10, ISBN_13];
-  client.query(sql, safeValues)
-    .then( results => {
-      response.redirect('/');
-      // response.render('pages/books/detail.ejs', {bookObj: results.rows,});
-    }).catch(error => console.log('save error', error));
-}
+// function saveBook(request, response){
+//   let sql = 'INSERT INTO books (title, author, book_description, categories, isbn_10, isbn_13) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;';
+//   // let sql = 'INSERT INTO book (title, book_description, author, img_link, isbn_10, isbn_13, categories) VALUES ($1, $2, $3, $4, $5, $6) WHERE NOT EXISTS (SELECT * FROM book WHERE isbn_10 = $5);';
+//   let {title, author, book_description, categories, ISBN_10, ISBN_13,} = request.body;
+//   let safeValues = [title, author, book_description, categories, ISBN_10, ISBN_13];
+//   client.query(sql, safeValues)
+//     .then( results => {
+//       response.redirect('/');
+//       // response.render('pages/books/detail.ejs', {bookObj: results.rows,});
+//     }).catch(error => console.log('save error', error));
+// }
 
 function showDetails(request, response){
   response.render('pages/books/show.ejs', {bookObj: request.body,});
@@ -125,6 +129,10 @@ function Book(obj){
   this.categories = obj.categories && obj.categories.length > 0 ? obj.categories.reduce ((acc, val, ind, arr) =>
   { acc += ind !== 0 && ind < arr.length ? ', ' : '';
     return acc += `${val}`;} ,'') : 'No Categories Available';
+
+  this.isbn_10 = obj.ISBN_10 || 0;
+  this.isbn_13 = obj.ISBN_13 || 0;
+  console.log(this);
 }
 
 client.connect()
