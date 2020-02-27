@@ -42,7 +42,6 @@ function deleteBook(request, response){
   let safeValues = [id];
   client.query(sql, safeValues)
     .then(() => {
-      alert('Book has been deleted');
       response.redirect('/');
     });
 }
@@ -93,7 +92,7 @@ function sendSearchForm(request, response){
     .then(results =>{
       let books = results.rows;
       let id = results.id;
-      response.render('pages/index.ejs', {bookArray: books, endpoint: `/delete/${id}?_method=DELETE`});
+      response.render('pages/index.ejs', {bookArray: books});
     });
 }
 
