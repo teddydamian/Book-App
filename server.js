@@ -7,11 +7,12 @@ const express = require('express');
 const app = express();
 require('ejs');
 const superagent = require('superagent');
+const methodOverride = require('method-override');
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true,}));
 app.use(express.static('./public'));
-
+app.use(methodOverride('_method'));
 
 const PORT = process.env.PORT || 3001;
 
@@ -22,29 +23,32 @@ const PORT = process.env.PORT || 3001;
 app.get('/', sendSearchForm);
 app.get('/error', serveErrorPage);
 app.post('/searches', collectFormData);
-app.post('/show', injectBook);
+// app.post('/show', injectBook);
 app.post('/detail', showDetails);
 app.get('/books/:id', getOneBook);
-app.post('/save', saveBook);
+app.post('/books', saveBook);
 
 function saveBook(request, response){
   console.log(request.body);
-  let sql = 'INSERT INTO books (title, author, book_description, categories, isbn_10, isbn_13) VALUES ($1, $2, $3, $4, $5, $6);';
-  let {title, author, description, categories, ISBN_10, ISBN_13} = request.body;
-  let safeValues = [title, author, description, categories, ISBN_10, ISBN_13];
+  let sql = 'INSERT INTO books (title, author, book_description, categories, isbn_10, isbn_13) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;';
+  let {title, author, book_description, categories, ISBN_10, ISBN_13,} = request.body;
+  let safeValues = [title, author, book_description, categories, ISBN_10, ISBN_13];
   client.query(sql, safeValues)
     .then( results => {
-      console.log('render error');
-      response.render('./pages/error.ejs');
-    });
+      console.log('results', results.rows);
+      response.render('pages/books/detail.ejs', {bookObj: results.rows,});
+    }).catch(error => console.log('save error', error));
 }
 
 function showDetails(request, response){
   console.log('hi', request.body);
   // let book = new Book(request.body);
   // console.log(book);
-  response.render('./pages/books/detail.ejs', {bookObj: request.body});
+  response.render('pages/books/show.ejs', {bookObj: request.body,});
 }
+
+
+
 
 function getOneBook(request, response){
   let id = request.params.id;
@@ -55,14 +59,14 @@ function getOneBook(request, response){
     .then(results => {
       // console.log(results);
       let book = results.rows[0];
-      response.render('./pages/books/detail.ejs', {bookObj: book});
+      response.render('pages/books/detail.ejs', {bookObj: book,});
     });
 }
 
 
-function injectBook(response, request){
+// function injectBook(response, request){
 
-}
+// }
 
 function sendSearchForm(request, response){
   let sql = 'SELECT * FROM books;';
@@ -72,7 +76,7 @@ function sendSearchForm(request, response){
       console.log(results);
       let books = results.rows;
 
-      response.render('pages/index.ejs', {bookArray: books});
+      response.render('pages/index.ejs', {bookArray: books,});
     });
 }
 
@@ -99,7 +103,6 @@ function collectFormData(request, response){
         return new Book(book.volumeInfo);
       });
       response.render('pages/searches/show.ejs', {bananas: finalArray,});
-
     }
     );
 }
@@ -123,10 +126,10 @@ function Book(obj){
   { acc += ind !== 0 && ind < arr.length ? ', ' : '';
     return acc += `${val}`;} ,'') : 'No Author Available';
 
-  this.description = obj.description || 'No Description Available';
+  this.book_description = obj.description || obj.book_description || 'No Description Available';
 
   this.image = obj.imageLinks !== undefined ? obj.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
-  this.id = obj.id;
+  this.id = obj.id || '';
   this.categories = obj.categories && obj.categories.length > 0 ? obj.categories.reduce ((acc, val, ind, arr) =>
   { acc += ind !== 0 && ind < arr.length ? ', ' : '';
     return acc += `${val}`;} ,'') : 'No Categories Available';
