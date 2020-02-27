@@ -8,7 +8,7 @@ function saveBook(request, response){
   let {title, author, book_description, categories, isbn_10, isbn_13,} = request.body;
   let safeValues = [title, author, book_description, categories, isbn_10, isbn_13];
   client.query(sql, safeValues)
-    .then( results => {
+    .then( () => {
       response.redirect('/');
       // response.render('pages/books/detail.ejs', {bookObj: results.rows,});
     }).catch(error => console.log('save error', error));
