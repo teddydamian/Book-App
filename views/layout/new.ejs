@@ -1,16 +1,14 @@
 // this is a partial to render the api results
 
-<section>
-  <ul>
+<% bookObj.forEach( book => {  %>
     <li data-id="">
-      <h4>Book title: <%= bookObj.title %></h4>
-      <p>Author(s): <%= bookObj.author %></p>
-      <p>Book Description: <%= bookObj.book_description %></p>
-      <img link="<%= bookObj.img_link %>"</p>
-      <p>ISBN13: <%= bookObj.ISBN_13 %></p>
-      <p>ISBN10: <%= bookObj.ISBN_10 %></p>
-      <p>Genre: <%= bookObj.categories %></p>
+      <h4>Book title: <%= book.title %></h4>
+      <p>Author(s): <%= book.author %></p>
+      <p>Book Description: <%= book.book_description %></p>
+      <img src="<%= book.image %>">
+      <p>ISBN13: <%= book.ISBN_13 %></p>
+      <p>ISBN10: <%= book.ISBN_10 %></p>
+      <p>Genre: <%= book.categories %></p>
     </li>
-  </ul>
+<% }); %>
 
-</section>
