@@ -16,8 +16,7 @@
       <p>Genre: <%= bookObj.categories %></p>
     </li>
   </ul>
-  <!-- <form action= "<%= `/update/${id}?_method=PUT` %>" method="POST"> -->
-  <form method="POST" action="/books">
+  <form action= "<%= endpoint %>" method="POST">
     <fieldset>
       <label>Title</label>
       <input class='title' type="text" name="title" value="<%= bookObj.title %>">
