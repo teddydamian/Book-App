@@ -10,7 +10,7 @@
       <h4>Book title: <%= bookObj.title %></h4>
       <p>Author(s): <%= bookObj.author %></p>
       <p>Book Description: <%= bookObj.book_description %></p>
-      <img link="<%= bookObj.img_link %>"</p>
+      <img src="<%= bookObj.image %>"></p>
       <p>ISBN13: <%= bookObj.isbn_13 %></p>
       <p>ISBN10: <%= bookObj.isbn_10 %></p>
       <p>Genre: <%= bookObj.categories %></p>
@@ -19,6 +19,7 @@
   <form action= "<%= endpoint %>" method="POST">
     <fieldset>
       <label>Title</label>
+      <input class='img' type="text" name="image" value="<%= bookObj.image %>" style="display:none;">
       <input class='title' type="text" name="title" value="<%= bookObj.title %>">
       <br>
       <label>Author</label>
@@ -31,10 +32,10 @@
       <input class='categories' type="text" name="categories" value="<%= bookObj.categories %>">
       <br>
       <label>ISBN 10</label>
-      <input class='ISBN' type="text" name="ISBN_10" value="<%= bookObj.isbn_10 %>">
+      <input class='ISBN' type="text" name="isbn_10" value="<%= bookObj.isbn_10 %>">
       <br>
       <label>ISBN 13</label>
-      <input class='ISBN' type="text" name="ISBN_13" value="<%= bookObj.isbn_13 %>">
+      <input class='ISBN' type="text" name="isbn_13" value="<%= bookObj.isbn_13 %>">
       <button type='submit'>Save</button>
     </fieldset>
   </form>
